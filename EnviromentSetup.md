@@ -22,7 +22,7 @@ Most VM are compressed with 7zip when downloaded. Therefor you should download a
 1. Download the kali linux virtual box VM from [https://cdimage.kali.org/kali-2023.4/kali-linux-2023.4-virtualbox-amd64.7z](https://cdimage.kali.org/kali-2023.4/kali-linux-2023.4-virtualbox-amd64.7z)
 2. Extract the downloaded 7z zip file to a folder (E.g. c:\vms)
 3. Add the extracted Kali Linux VM to virtual box by clicking _Machine->add_ and select the _.vbox_ file.  
-![Alt text](VirtualBoxAddVM.png)  
+![Alt text](./EnviromentSetup/VirtualBoxAddVM.png)  
 4. Start the Kali linux instance
 5. when prompted for credentials, enter user name `kali` and password `kali`
 6. open up a terminal window by pressing `ctrl+alt+t`
@@ -36,15 +36,15 @@ _The command only sets the layout for the session, i will leave it as an exercis
 1. Download the Metasploitable zip file from [https://sourceforge.net/projects/metasploitable/files/Metasploitable2/](https://sourceforge.net/projects/metasploitable/files/Metasploitable2/)
 2. Unzip the file to a folder (i suggest that you keep all your VMs in the same top level folder) 
 3. In Virtualbox, create a new VM by clicking _Machine->new_  
-![Alt text](image.png)  
+![Alt text](./EnviromentSetup/image.png)  
 4. In the setup wizard, choose an appropriate name for the VM (E.g. Metasploitable) and folder. Set `Iso image` to `<not selected>`. Set type to `Linux` and `Version` to `Ubuntu (64-bit)`  
-![Alt text](image-1.png)  
+![Alt text](./EnviromentSetup/image-1.png)  
 5. Set the `Base  memory` to `2048 MB` and `Processors` to `1 CPU`.  
-![Alt text](image-2.png)  
+![Alt text](./EnviromentSetup/image-2.png)  
 6. Choose `Use existing virtual hard disk file`, and click the `Hard Disk Selector icon`  
-![Alt text](image-3.png)  
+![Alt text](./EnviromentSetup/image-3.png)  
 7. In `Hard Disk Selector`, click `Add`, and choose the .vmdk file from the unzipped Metasploitable folder  
-![Alt text](image-4.png)  
+![Alt text](./EnviromentSetup/image-4.png)  
   
 You **shouldn't start** the VM just yet. But the default credentials are `username msfadmin`, and `password msfadmin`.
   
@@ -53,21 +53,21 @@ By default, Virtual box assigns all VMs the same ip address. We will change this
 
 ### Creating a NAT Network
 1. Open Virtual box  network manager by clicking _File->Tools->Network manager_  
-![Alt text](image-5.png)  
+![Alt text](./EnviromentSetup/image-5.png)  
 2. Click the `NAT Networks` pane, and click create  
-![Alt text](image-6.png)  
+![Alt text](./EnviromentSetup/image-6.png)  
 3. In the `General Options` pane of the created NAT network change the name to `DefaultVMNet`, and set ´IPv4´ to ´10.0.2.0/24´ and ensure that `Enable DHCP` is **unchecked**   
-![Alt text](image-7.png)  
+![Alt text](./EnviromentSetup/image-7.png)  
   
 ### Adding VM to the NAT network
 _These instructions should be performed on both of the previous created VMs, and all VMs created in the future_  
 1. goto the settings of the VM  
-![Alt text](image-8.png)  
+![Alt text](./EnviromentSetup/image-8.png)  
 2. Select the `Network` option, and click the Adapter 1 pane.  
 3. Ensure that ´Enable Network Adapter´ is checked, and set ´Attached to´ as ´NAT Network´  
 4. Set the ´Name´ to ´DefaultVMNet´
 5. Unfold the `Advanced` options, and click the `Generate MAC Address` on the left hand side of the `MAC address` text field  
-![Alt text](image-9.png)
+![Alt text](./EnviromentSetup/image-9.png)
   
 Perform step 1 to 5 for all VMs
   
@@ -103,7 +103,7 @@ address 10.0.2.2/24
 gateway 10.0.2.1
 ```  
 _If auto eth0 is already defined in the file, you should overwrite that_  
-![Alt text](image-10.png)  
+![Alt text](./EnviromentSetup/image-10.png)  
 4. Save the changes by pressing `ctrl+s` and exit nano by pressing `ctrl+x`.  
 5. restart the network process by executing the command `sudo systemctl restart networking`  
 6. Open the `resolv.conf` file with the command `sudo nano /etc/resolv.conf`   
@@ -133,7 +133,7 @@ dns-nameservers 8.8.8.8
 ```  
 _If auto eth0 is already defined in the file, you should overwrite that_  
   
-![Alt text](image-11.png)  
+![Alt text](./EnviromentSetup/image-11.png)  
   
 6. Save the changes to the file by pressing `ctrl+s` and exit nano by pressing `ctrl+x`
 7. Restart the network service by executing the command `sudo /etc/init.d/networking restart`
@@ -146,7 +146,7 @@ test to validate correct configuration, is to ping the Kali VM from the Metasplo
   
 Often when testing network connections, a ping request is sent using the [ping command](https://linux.die.net/man/8/ping). This command
 sends a request using the Internet control message protocol (ICMP) and awaits a successful response to the request.
-In the test, the application tcpdump is used on the receiving VM (Kali). Using Tcpdump is not necessary to test network connectivity with ICMP requests,
+In the test, the application Tcpdump is used on the receiving VM (Kali). Using Tcpdump is not necessary to test network connectivity with ICMP requests,
 but it does verify that the host responding to the ICMP request, is the host that connectivity where tested towards. Strictly speaking, this is seems redundant in
 a small setup such as this. But it is a good  habit, that will come in handy when you are testing in bigger environments, or in the late hours with a tired mind.
   
@@ -164,15 +164,23 @@ can be restored to a functioning state. In the subsequent steps, you will be sho
 should always do it, before making any changes to the configurations or setup of the VM (Major ones at least).  
 
 1. In Virtual box, click the `options` icon to the right of the VM name and select `snapshots`  
-![Alt text](image-12.png)  
+![Alt text](./EnviromentSetup/image-12.png)  
 2. Click the `Take` button  
-![Alt text](image-13.png)  
+![Alt text](./EnviromentSetup/image-13.png)  
 3. Give the snapshot a name that relates to the current state of the VM, and a description  
-![Alt text](image-14.png)  
+![Alt text](./EnviromentSetup/image-14.png)  
 
-That is all there is to it. Next time you create a snapshot of the VM, and addtional entry will appear indented after the previous snapshot.  
-![Alt text](image-15.png)
+That is all there is to it. Next time you create a snapshot of the VM an additional entry will appear indented after the previous snapshot.  
+![Alt text](./EnviromentSetup/image-15.png)
     
+**Always remember to create restore points. Forgetting it, can present you with a hard lesson in debugging OS misconfigurations**
+
+### Ubuntu
+
+### Windows
+
+
+
 2. Set up Windows 11 virtual machine
  _Windows firewall does not by default allow ICMP packages_
     Download a windows 11 developer vm from https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/ (Windows 11) (Select virtualbox)
@@ -184,14 +192,13 @@ That is all there is to it. Next time you create a snapshot of the VM, and addti
      Goto the settings of the vm and click on the network settings. Click adapter 1 tab and set `Attached to` to `NAT Network`, set the `Name` to `DefaultVMNet`, and regenerate the Mac address
 
 
-4. Create restore points
-    click the options icon on the right of each vm in virtualbox and select snapshots, and click `Take`
 
 
 
 
-### Windows
 
-### Ubuntu
+
+
+
 
 
