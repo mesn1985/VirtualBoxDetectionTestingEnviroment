@@ -6,7 +6,7 @@ Tutorial used:  https://subscription.packtpub.com/video/security/9781803241920/p
 Resource usage (requirements): 16GB+ (32GB recommended)
 _The resource usage differ depending on the number of running VMs. Omitting the windows VM, lowers the resource usage significantly_
 
-# Setting up the enviroment
+# Setting up the environment
 
 ## Install virtual box
 All the VMs are configured and executed in Virtual box 7.0.12 executing on windows 10.
@@ -88,31 +88,39 @@ This create the network as shown in the table below.
   
 We will now assign static ip addresses within this network to the Kali VM and Metasploitable VM.
   
-### Kali
+#### Kali
+Setting up static ip address on Kali Linux is somewhat straight forward. We will do this from the
+command line. In case you did not solve the issue with persisting the keyboard layout for Kali, remember
+you change the layout for the session, with the command `setxkbmap -layout dk` (replacing _dk_ with the language abbreviation you desire).
+
 1. Start the Kali VM, and open a terminal by pressing ´ctrl+alt+t´
 2. Edit the network configuration file by executing the command `$ sudo nano /etc/network/interfaces`
-3. Append the following text to the file:
+3. Append the following text to the file:  
 ```
 auto eth0
 iface eth0 inet static
 address 10.0.2.2/24
 gateway 10.0.2.1
-```
+```  
 _If auto eth0 is already defined in the file, you should overwrite that_  
 ![Alt text](image-10.png)  
-4. Save the changes by pressing `ctrl+s` and exit nano by pressing `ctrl+x`.
-5. restart the network process by executing the command `sudo systemctl restart networking`
-6. Open the `resolv.conf` file with the command `sudo nano /etc/resolv.conf` 
-7. Add the line `nameserver 8.8.8.8`
-8. Save the change by pressing `ctrl+s` and exit nano by pressing `ctrl+x`
-9. Test the network configuration by executing the command `ping www.google.com` sending ping packages to google. If you are getting a response, the configuration is working.
+4. Save the changes by pressing `ctrl+s` and exit nano by pressing `ctrl+x`.  
+5. restart the network process by executing the command `sudo systemctl restart networking`  
+6. Open the `resolv.conf` file with the command `sudo nano /etc/resolv.conf`   
+7. Add the line `nameserver 8.8.8.8`  
+8. Save the change by pressing `ctrl+s` and exit nano by pressing `ctrl+x`  
+9. Test the network configuration by executing the command `ping www.google.com` sending ping packages to google. If you are getting a response, the configuration is working.  
+  
+#### Metasploitable (Ubuntu)
+Metasploitable is based on a Ubuntu 8.x distribution of Linux and is somewhat outdated. Further more it is not designed nor
+build a lot of human interaction. Therefor it can be a bit more tricky to change its configurations (Compared to Kali, and newer Ubuntu versions), but by no means impossible nor
+to difficult.
 
-### Metasploitable (Ubuntu)
-Start the VM
-Default credentials: user: msfadmin password:msfadmin
-loadkeys dk (Sets for keyboard layout for the session )
-`$ sudo nano /etc/network/interfaces`
-Add in the bottom (if eth0 is already defined, it should be removed)
+1. Start the Metasploitable VM
+2. When prompted for credentials, Authenticate using the default credentials `Username: msfadmin password: msfadmin`
+3. Set the keyboard layout to your desired language with the command `loadkeys <langauge code>` (E,g, `loadkeys dk` for danish)
+4. Edit the network configuration file, by executing the command `$ sudo nano /etc/network/interfaces`
+5. In the configuration file, append the following text:
 ```
 auto eth0
 iface eth0 inet static
@@ -122,17 +130,48 @@ network 10.0.2.0
 broadcast 10.0.2.255
 gateway 10.0.2.1
 dns-nameservers 8.8.8.8
-```
-`sudo /etc/init.d/networking restart`
-Test with `ping www.google.com`
+```  
+_If auto eth0 is already defined in the file, you should overwrite that_  
+  
+![Alt text](image-11.png)  
+  
+6. Save the changes to the file by pressing `ctrl+s` and exit nano by pressing `ctrl+x`
+7. Restart the network service by executing the command `sudo /etc/init.d/networking restart`
+8. Test the network setting by pinging Google, with the command `ping www.google.com`
 
-### Testing the network connection between metasploitable and Kali Linux
-turn on both VMs
-in kali execute `tcpdump icmp`
-in metasploit execute ´ping 10.0.2.2´
 
-Verify that kali linux recieves the pings
+#### Testing the network connection between metasploitable and Kali Linux
+It is important that the Kali VM and the Metasploitable VM can communicate on the network, so the final 
+test to validate correct configuration, is to ping the Kali VM from the Metasploitable VM.
+  
+Often when testing network connections, a ping request is sent using the [ping command](https://linux.die.net/man/8/ping). This command
+sends a request using the Internet control message protocol (ICMP) and awaits a successful response to the request.
+In the test, the application tcpdump is used on the receiving VM (Kali). Using Tcpdump is not necessary to test network connectivity with ICMP requests,
+but it does verify that the host responding to the ICMP request, is the host that connectivity where tested towards. Strictly speaking, this is seems redundant in
+a small setup such as this. But it is a good  habit, that will come in handy when you are testing in bigger environments, or in the late hours with a tired mind.
+  
+1. Turn on the Kali VM and The Metasploitable VM.
+2. In the Kali VM, start the host network monitor _tcpdump_ by executing the command `tcpdump icmp`. the  ICMP parameter, specifies that tcpdump should only create output, when a ICMP request is received
+3. In the Metasploitable VM, send a ICMP request to the kali VM by executing the command `ping 10.0.2.2` 
+4. In the Metasploitable VM, verify that a response to the ICMP request is received.
+5. In the Kali VM, verify that Tcpdump have create an output line in the CLI for each ICMP request.
 
+### Recovery (Restore points)
+When experimenting or changing configurations of VMs, an unintended side effect often is that something goes wrong and they
+stop working in the intended manner. Usually this can be fixed, but fixing it can be time consuming, and an unwanted distraction from
+learning more general concepts. Therefor it is a good idea to create restore points(snapshots) for each VM in the environment, so that each vm  
+can be restored to a functioning state. In the subsequent steps, you will be show how to do this. You should do this for each of your VMs, and you
+should always do it, before making any changes to the configurations or setup of the VM (Major ones at least).  
+
+1. In Virtual box, click the `options` icon to the right of the VM name and select `snapshots`  
+![Alt text](image-12.png)  
+2. Click the `Take` button  
+![Alt text](image-13.png)  
+3. Give the snapshot a name that relates to the current state of the VM, and a description  
+![Alt text](image-14.png)  
+
+That is all there is to it. Next time you create a snapshot of the VM, and addtional entry will appear indented after the previous snapshot.  
+![Alt text](image-15.png)
     
 2. Set up Windows 11 virtual machine
  _Windows firewall does not by default allow ICMP packages_
