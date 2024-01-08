@@ -1,19 +1,12 @@
 
-
-**Most of the downloaded VMs are zipped with 7zip**
-Tutorial used:  https://subscription.packtpub.com/video/security/9781803241920/p1/video1_3/set-up-kali-as-a-virtual-machine-virtualbox
-
-Resource usage (requirements): 16GB+ (32GB recommended)
-_The resource usage differ depending on the number of running VMs. Omitting the windows VM, lowers the resource usage significantly_
-
 # Setting up the environment
 
 ## Install virtual box
-All the VMs are configured and executed in Virtual box 7.0.12 executing on windows 10.
+All the VMs are configured and executed in Virtual box 7.0.12 executing on a windows 10 host.
 Download Virtual box  7.0.12, and follow the install wizard.
 
-_Beaware, unlike VMWare workstation, there is not at NAT network between host and vms (Although one could be created)_
-
+Virtual box 7.0.12 can be downloaded from this link: [https://download.virtualbox.org/virtualbox/7.0.12/VirtualBox-7.0.12-159484-Win.exe](https://download.virtualbox.org/virtualbox/7.0.12/VirtualBox-7.0.12-159484-Win.exe)
+  
 ## Unpacking the the downloaded VMs.
 Most VM are compressed with 7zip when downloaded. Therefor you should download and install 7zip from [https://www.7-zip.org/](https://www.7-zip.org/)
 
@@ -70,6 +63,8 @@ _These instructions should be performed on both of the previous created VMs, and
 ![Alt text](./EnviromentSetup/image-9.png)
   
 Perform step 1 to 5 for all VMs
+
+_Beaware, unlike VMWare workstation, there is not at NAT network between host and vms (Although one could be created)_
   
 ### Configuring static ip address  
   
@@ -178,9 +173,6 @@ That is all there is to it. Next time you create a snapshot of the VM an additio
 ### Ubuntu
 
 ### Windows
-
-
-
 2. Set up Windows 11 virtual machine
  _Windows firewall does not by default allow ICMP packages_
     Download a windows 11 developer vm from https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/ (Windows 11) (Select virtualbox)
@@ -191,6 +183,9 @@ That is all there is to it. Next time you create a snapshot of the VM an additio
     Finish the import
      Goto the settings of the vm and click on the network settings. Click adapter 1 tab and set `Attached to` to `NAT Network`, set the `Name` to `DefaultVMNet`, and regenerate the Mac address
 
+### Resource requirements
+Resource usage (requirements): 16GB+ (32GB recommended)
+_The resource usage differ depending on the number of running VMs. Omitting the windows VM, lowers the resource usage significantly_
 
 
 
