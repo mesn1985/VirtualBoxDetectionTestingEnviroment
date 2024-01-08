@@ -1,5 +1,6 @@
 
 # Setting up the environment
+In this section, 
 
 ## Install virtual box
 All the VMs are configured and executed in Virtual box 7.0.12 executing on a windows 10 host.
@@ -21,7 +22,7 @@ Most VM are compressed with 7zip when downloaded. Therefor you should download a
 6. open up a terminal window by pressing `ctrl+alt+t`
 7. Set the keyboard layout language to your respective keyboard layout with the command ´setxkbmap -layout <language identifier>´ (E.g. `setxkbmap -layout dk` for danish).
 _The command only sets the layout for the session, i will leave it as an exercise to figure out how to persist the change_
-8. update your Kali Linux VM by executing the command `sudo apt update && sudo apt upgrade`.
+8. update your Kali Linux VM by executing the command `apt update && apt upgrade`.
 9. Shutdown the Kali Linux
 
 ## Setting up Metasploitable VM
@@ -68,7 +69,7 @@ _Beaware, unlike VMWare workstation, there is not at NAT network between host an
   
 ### Configuring static ip address  
   
-In the network manager, DefaultVMNet had its address set to 10.0.2.0 and subnet address to 255.255.255.0.
+In the network manager, DefaultVMNet has its address set to 10.0.2.0 and subnet address to 255.255.255.0.
 This create the network as shown in the table below.  
   
 | Description    | Value |
@@ -89,7 +90,7 @@ command line. In case you did not solve the issue with persisting the keyboard l
 you change the layout for the session, with the command `setxkbmap -layout dk` (replacing _dk_ with the language abbreviation you desire).
 
 1. Start the Kali VM, and open a terminal by pressing ´ctrl+alt+t´
-2. Edit the network configuration file by executing the command `$ sudo nano /etc/network/interfaces`
+2. Edit the network configuration file by executing the command `nano /etc/network/interfaces`
 3. Append the following text to the file:  
 ```
 auto eth0
@@ -100,8 +101,8 @@ gateway 10.0.2.1
 _If auto eth0 is already defined in the file, you should overwrite that_  
 ![Alt text](./EnviromentSetup/image-10.png)  
 4. Save the changes by pressing `ctrl+s` and exit nano by pressing `ctrl+x`.  
-5. restart the network process by executing the command `sudo systemctl restart networking`  
-6. Open the `resolv.conf` file with the command `sudo nano /etc/resolv.conf`   
+5. restart the network process by executing the command `systemctl restart networking`  
+6. Open the `resolv.conf` file with the command `nano /etc/resolv.conf`   
 7. Add the line `nameserver 8.8.8.8`  
 8. Save the change by pressing `ctrl+s` and exit nano by pressing `ctrl+x`  
 9. Test the network configuration by executing the command `ping www.google.com` sending ping packages to google. If you are getting a response, the configuration is working.  
@@ -114,7 +115,7 @@ to difficult.
 1. Start the Metasploitable VM
 2. When prompted for credentials, Authenticate using the default credentials `Username: msfadmin password: msfadmin`
 3. Set the keyboard layout to your desired language with the command `loadkeys <langauge code>` (E,g, `loadkeys dk` for danish)
-4. Edit the network configuration file, by executing the command `$ sudo nano /etc/network/interfaces`
+4. Edit the network configuration file, by executing the command `nano /etc/network/interfaces`
 5. In the configuration file, append the following text:
 ```
 auto eth0
@@ -131,7 +132,7 @@ _If auto eth0 is already defined in the file, you should overwrite that_
 ![Alt text](./EnviromentSetup/image-11.png)  
   
 6. Save the changes to the file by pressing `ctrl+s` and exit nano by pressing `ctrl+x`
-7. Restart the network service by executing the command `sudo /etc/init.d/networking restart`
+7. Restart the network service by executing the command `/etc/init.d/networking restart`
 8. Test the network setting by pinging Google, with the command `ping www.google.com`
 
 
@@ -168,27 +169,68 @@ should always do it, before making any changes to the configurations or setup of
 That is all there is to it. Next time you create a snapshot of the VM an additional entry will appear indented after the previous snapshot.  
 ![Alt text](./EnviromentSetup/image-15.png)
     
-**Always remember to create restore points. Forgetting it, can present you with a hard lesson in debugging OS misconfigurations**
+**Always remember to create restore points. Forgetting it, can present you with a very time consuming lesson in debugging OS misconfigurations**
 
-### Ubuntu
+### Ubuntu Server
+We will setup a VM with Ubuntu server as well which will serve as the deployment OS for the environment.
+Canonical which created and maintains Ubuntu have not created an official premade image. so rather the 
 
-### Windows
-2. Set up Windows 11 virtual machine
- _Windows firewall does not by default allow ICMP packages_
-    Download a windows 11 developer vm from https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/ (Windows 11) (Select virtualbox)
-    _The VM is using  a evaluation license, alternatively if you have access to Azure student subscription, you can get a non evaluation windows version from there_
-    Unzip the vm
-    In virtual box, click _Files -> Import appliance _
-    Select the unzipped OVA file
-    Finish the import
-     Goto the settings of the vm and click on the network settings. Click adapter 1 tab and set `Attached to` to `NAT Network`, set the `Name` to `DefaultVMNet`, and regenerate the Mac address
+1. Download Ubuntu server 23.10 from ISO file from the official Ubuntu website[https://ubuntu.com/download/server](https://ubuntu.com/download/server)
+2. In Virtual box, choose _machine->new_    
+![Alt text](image.png)  
+3. Give the server VM an appropriate name, and in the `ISO image` drop down menu select other, and browse for the downloaded Ubuntu server ISO file  
+![Alt text](image-1.png)  
+4. Enter your desired credentials **And remember them, if you forget them, there is no recovery**  
+![Alt text](image-2.png)  
+5. Set your desired amount of RAM and number of CPUs (Start by trying 1 cpu and 2GB of RAM, and increase later if needed)  
+![Alt text](image-3.png)  
+6. Ensure that `Create a virtual Hard Disk Now` is checked, and set the size for `25 GB`   
+![Alt text](image-4.png)    
+7. Click the finish button, and await that the WM is created.  
+8. Once the VM is created, Configure the VMs network setting as defined in the section [Adding VM  to the nat network](#adding-vm-to-the-nat-network)  
+  
+Next comes the setup of  Ubuntu server. As mentioned earlier, this is not a prebuilt image but rather an image created by virtualbox using the 
+Ubuntu ISO file as installation media. So you will have to go through the Ubuntu installation process. I will skip the trivial parts of the
+installation process  (E.g. choosing language etc. ).  
+  
+1. Start you Ubuntu server VM and wait for the installation wizard when prompted.
+2. When prompted for `type of install`, choose `Ubuntu Server`.  
+3. In the `Network connections`menu, enter the network setting by marking the network interface and pressing `space` key   
+![Alt text](image-5.png)   
+4. Select  `Edit IPv4`  
+![Alt text](image-6.png)  
+5. Choose `Manual` for `IPv4`   
+![Alt text](image-7.png)  
+6. Enter the network information, described in the [Configuring static ip adresse](#configuring-static-ip-address) section. The ip address for this host should be `10.0.2.4`  
+![Alt text](image-8.png)  
+_Note the the subnet is written in CIDR format_  
+  
+7. In the `Guided storage configuration` prompt, choose `use an entire disk`  
+    
+The rest of the installation should be pretty straight forward.  Although you should remember to update the Ubuntu instance with the command `apt update && apt upgrade`
 
+### Windows 11
+We will also create a windows 11 vm.
+Microsoft provides a prebuilt windows 11 image which is specifically created for development environments. It is free and uses a trial license.
+ 
+1. Download the prebuilt windows 11 VM from  https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/  
+2. unzip the downloaded file to an appropriate folder.  
+3. In virtual box, click _Files -> Import appliance_ and browse for the unzipped OVA file.   
+![Alt text](image-9.png)   
+4. Finish the import and await that the VM is created.  
+5. Configure the VMs network setting as defined in the section [Adding VM  to the nat network](#adding-vm-to-the-nat-network)  
+6. start the VM   
+7. Configure Windows to use a static ip. You can follow this tutorial [Configuring static ip in windows 11](https://www.google.com/search?q=setting+static+ip+on+windows+11&oq=setting+static+ip+on+windows+11&  gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQABiABDIHCAIQABiABDIHCAMQABiABDIICAQQABgWGB4yCAgFEAAYFhgeMggIBhAAGBYYHjIICAcQABgWGB4yCAgIEAAYFhgeMggICRAAGBYYHtIBCDUyODZqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8#fpstate=ive&ip=1&vld=cid:20831224,vid:w_dMQePa0sQ,st:0). The ip address should b `10.0.2.5`, and the
+remaining configuration should be according to that described in the [Configuring static ip adresse](#configuring-static-ip-address) section.  
+  
+ _Windows firewall does not allow ICMP packages by default, you need to create a firewall rule to allow this_
+  
 ### Resource requirements
 Resource usage (requirements): 16GB+ (32GB recommended)
 _The resource usage differ depending on the number of running VMs. Omitting the windows VM, lowers the resource usage significantly_
 
 
-
+### Exporting the images
 
 
 
