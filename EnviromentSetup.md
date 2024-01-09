@@ -39,7 +39,7 @@ Most VM are compressed with 7zip when downloaded. Therefor you should download a
 7. In the `Hard Disk Selector`, click `Add` and choose the .vmdk file from the unzipped Metasploitable folder.  
 ![Alt text](./EnviromentSetup/image-4.png)  
 
-**Note: You should not start the VM just yet. The default credentials are `username: msfadmin`, and `password: msfadmin`.**
+**Note: You should not start the VM just yet.**
    
 ## Setting up the Network
 By default, Virtual box assigns all VMs the same ip address. We will change this by creating a NAT network.
@@ -171,13 +171,13 @@ By following these steps, you'll create a snapshot of the current state of the V
    - Navigate to `Machine -> New`.
    - Provide the server VM with an appropriate name.
    - Select "Other" for the `ISO image` and browse for the downloaded Ubuntu Server ISO file.
-   - ![Alt text](image.png)
+   - ![Alt text](image-16.png)
 
 3. **Configure VM Settings**:
    - Set up your desired credentials during the installation process.
    - Allocate 2GB RAM and start with 1 CPU.
    - Check "Create a virtual Hard Disk Now" and set the size to 25GB.
-   - ![Alt text](image-1.png)
+   - ![Alt text](image-17.png)
 
 4. **Finalize VM Creation**:
    - Click `Finish` and await the completion of the VM creation process.
@@ -187,6 +187,7 @@ By following these steps, you'll create a snapshot of the current state of the V
 
 #### Ubuntu Server Setup:
 
+
 1. **Start Ubuntu Server VM and Initiate Installation**:
    - Start the Ubuntu Server VM and wait for the installation wizard to appear.
    - Choose `Ubuntu Server` when prompted for the `type of install`.
@@ -195,16 +196,16 @@ By following these steps, you'll create a snapshot of the current state of the V
    - In the `Network connections` menu, mark the network interface and press `space`.
    - Select `Edit IPv4` and choose `Manual` for `IPv4`.
    - Enter the network information described in the [Configuring static ip address](#configuring-static-ip-address) section, with the IP address for this host set to `10.0.2.4`.
-   - ![Alt text](image-5.png)
-   - ![Alt text](image-6.png)
-   - ![Alt text](image-7.png)
-   - ![Alt text](image-8.png) *(Note: the subnet is written in CIDR format)*
+   - ![Alt text](image-18.png)
+   - ![Alt text](image-19.png)
+   - ![Alt text](image-20.png)
+   - ![Alt text](image-21.png) *(Note: the subnet is written in CIDR format)*
 
 3. **Complete Installation**:
    - Follow the remaining installation steps; typically, the process is straightforward.
    - Remember to update the Ubuntu instance using the command `apt update && apt upgrade`.
   
-### Windows 11 VM Setup:
+### Setting up Windows 11 VM:
 
 1. **Download Windows 11 Prebuilt VM**:
    - Obtain the prebuilt Windows 11 VM from [Microsoft's VM download page](https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/).
@@ -215,7 +216,7 @@ By following these steps, you'll create a snapshot of the current state of the V
 3. **Import the VM in VirtualBox**:
    - Open VirtualBox and navigate to `Files -> Import Appliance`.
    - Browse for the unzipped OVA file.
-   - ![Alt text](image-9.png)
+   - ![Alt text](image-22.png)
    
 4. **Complete VM Import**:
    - Finish the import process and wait for the VM to be created.
