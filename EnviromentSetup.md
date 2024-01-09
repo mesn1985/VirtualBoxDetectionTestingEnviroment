@@ -1,6 +1,6 @@
 
 # Setting up the environment
-In this section, 
+This guide walks you through setting up a virtual environment for cybersecurity learning and experimentation. The environment is designed to include various virtual machines (VMs) managed through VirtualBox 7.0.12.
 
 ## Install virtual box
 All the VMs are configured and executed in Virtual box 7.0.12 executing on a windows 10 host.
@@ -10,221 +10,228 @@ Virtual box 7.0.12 can be downloaded from this link: [https://download.virtualbo
   
 ## Unpacking the the downloaded VMs.
 Most VM are compressed with 7zip when downloaded. Therefor you should download and install 7zip from [https://www.7-zip.org/](https://www.7-zip.org/)
-
+  
 ## Setting up Kali Linux VM
-
-1. Download the kali linux virtual box VM from [https://cdimage.kali.org/kali-2023.4/kali-linux-2023.4-virtualbox-amd64.7z](https://cdimage.kali.org/kali-2023.4/kali-linux-2023.4-virtualbox-amd64.7z)
-2. Extract the downloaded 7z zip file to a folder (E.g. c:\vms)
-3. Add the extracted Kali Linux VM to virtual box by clicking _Machine->add_ and select the _.vbox_ file.  
+  
+1. Download the Kali Linux VirtualBox VM from [https://cdimage.kali.org/kali-2023.4/kali-linux-2023.4-virtualbox-amd64.7z](https://cdimage.kali.org/kali-2023.4/kali-linux-2023.4-virtualbox-amd64.7z).
+2. Extract the downloaded 7z zip file to a folder (e.g., `C:\vms`).
+3. Add the extracted Kali Linux VM to VirtualBox by clicking _Machine_ -> _Add_ and selecting the _.vbox_ file.  
 ![Alt text](./EnviromentSetup/VirtualBoxAddVM.png)  
-4. Start the Kali linux instance
-5. when prompted for credentials, enter user name `kali` and password `kali`
-6. open up a terminal window by pressing `ctrl+alt+t`
-7. Set the keyboard layout language to your respective keyboard layout with the command ´setxkbmap -layout <language identifier>´ (E.g. `setxkbmap -layout dk` for danish).
-_The command only sets the layout for the session, i will leave it as an exercise to figure out how to persist the change_
-8. update your Kali Linux VM by executing the command `apt update && apt upgrade`.
-9. Shutdown the Kali Linux
-
+4. Start the Kali Linux instance.
+5. When prompted for credentials, enter the username `kali` and password `kali`.
+6. Open a terminal window by pressing `Ctrl+Alt+T`.
+7. Set the keyboard layout language to your respective keyboard layout with the command `setxkbmap -layout <language identifier>` (e.g., `setxkbmap -layout dk` for Danish). _This command only sets the layout for the session. How to persist the change can be explored separately._
+8. Update your Kali Linux VM by executing the command `apt update && apt upgrade`.
+9. Shutdown the Kali Linux VM.
+  
 ## Setting up Metasploitable VM
-
-1. Download the Metasploitable zip file from [https://sourceforge.net/projects/metasploitable/files/Metasploitable2/](https://sourceforge.net/projects/metasploitable/files/Metasploitable2/)
-2. Unzip the file to a folder (i suggest that you keep all your VMs in the same top level folder) 
-3. In Virtualbox, create a new VM by clicking _Machine->new_  
+  
+1. Download the Metasploitable zip file from [https://sourceforge.net/projects/metasploitable/files/Metasploitable2/](https://sourceforge.net/projects/metasploitable/files/Metasploitable2/).
+2. Unzip the file to a folder (it is recommended to keep all your VMs in the same top-level folder).
+3. In VirtualBox, create a new VM by clicking _Machine_ -> _New_.  
 ![Alt text](./EnviromentSetup/image.png)  
-4. In the setup wizard, choose an appropriate name for the VM (E.g. Metasploitable) and folder. Set `Iso image` to `<not selected>`. Set type to `Linux` and `Version` to `Ubuntu (64-bit)`  
+4. In the setup wizard, choose an appropriate name for the VM (e.g., Metasploitable) and folder. Set `ISO image` to `<not selected>`. Set type to `Linux` and `Version` to `Ubuntu (64-bit)`.  
 ![Alt text](./EnviromentSetup/image-1.png)  
-5. Set the `Base  memory` to `2048 MB` and `Processors` to `1 CPU`.  
+5. Set the `Base memory` to `2048 MB` and `Processors` to `1 CPU`.  
 ![Alt text](./EnviromentSetup/image-2.png)  
-6. Choose `Use existing virtual hard disk file`, and click the `Hard Disk Selector icon`  
+6. Choose `Use existing virtual hard disk file` and click the `Hard Disk Selector icon`.  
 ![Alt text](./EnviromentSetup/image-3.png)  
-7. In `Hard Disk Selector`, click `Add`, and choose the .vmdk file from the unzipped Metasploitable folder  
+7. In the `Hard Disk Selector`, click `Add` and choose the .vmdk file from the unzipped Metasploitable folder.  
 ![Alt text](./EnviromentSetup/image-4.png)  
-  
-You **shouldn't start** the VM just yet. But the default credentials are `username msfadmin`, and `password msfadmin`.
-  
+
+**Note: You should not start the VM just yet. The default credentials are `username: msfadmin`, and `password: msfadmin`.**
+   
 ## Setting up the Network
 By default, Virtual box assigns all VMs the same ip address. We will change this by creating a NAT network.
 
 ### Creating a NAT Network
-1. Open Virtual box  network manager by clicking _File->Tools->Network manager_  
+1. Open VirtualBox network manager by clicking _File_ -> _Tools_ -> _Network Manager_.  
 ![Alt text](./EnviromentSetup/image-5.png)  
-2. Click the `NAT Networks` pane, and click create  
+2. Click the `NAT Networks` pane and then click `Create`.  
 ![Alt text](./EnviromentSetup/image-6.png)  
-3. In the `General Options` pane of the created NAT network change the name to `DefaultVMNet`, and set ´IPv4´ to ´10.0.2.0/24´ and ensure that `Enable DHCP` is **unchecked**   
+3. In the `General Options` pane of the created NAT network, change the name to `DefaultVMNet`. Set `IPv4` to `10.0.2.0/24`, and ensure that `Enable DHCP` is **unchecked**.  
 ![Alt text](./EnviromentSetup/image-7.png)  
   
-### Adding VM to the NAT network
-_These instructions should be performed on both of the previous created VMs, and all VMs created in the future_  
-1. goto the settings of the VM  
+### Adding VMs to the NAT network
+_These instructions should be performed on both of the previously created VMs and all VMs created in the future._  
+1. Go to the settings of the VM.  
 ![Alt text](./EnviromentSetup/image-8.png)  
-2. Select the `Network` option, and click the Adapter 1 pane.  
-3. Ensure that ´Enable Network Adapter´ is checked, and set ´Attached to´ as ´NAT Network´  
-4. Set the ´Name´ to ´DefaultVMNet´
-5. Unfold the `Advanced` options, and click the `Generate MAC Address` on the left hand side of the `MAC address` text field  
-![Alt text](./EnviromentSetup/image-9.png)
-  
-Perform step 1 to 5 for all VMs
+2. Select the `Network` option and click the `Adapter 1` pane.  
+3. Ensure that `Enable Network Adapter` is checked and set `Attached to` as `NAT Network`.  
+4. Set the `Name` to `DefaultVMNet`.  
+5. Expand the `Advanced` options and click `Generate MAC Address` on the left-hand side of the `MAC address` text field.  
+![Alt text](./EnviromentSetup/image-9.png)  
 
-_Beaware, unlike VMWare workstation, there is not at NAT network between host and vms (Although one could be created)_
+Perform steps 1 to 5 for all VMs.
   
-### Configuring static ip address  
+_Beware, unlike VMWare workstation, there is not at NAT network between host and vms (Although one could be created)_
+  
+### Configuring Static IP Address  
   
 In the network manager, DefaultVMNet has its address set to 10.0.2.0 and subnet address to 255.255.255.0.
-This create the network as shown in the table below.  
+This creates the network as shown in the table below.  
   
-| Description    | Value |
-| -------- | ------- |
-|Total number of ip addresses|256|
-|Number of usable ip address|253|
-|Network|10.0.2.0|
-|Gateway|10.0.2.1|
-|Broadcast|10.0.2.255|
-|First usable ip address |10.0.2.2|
-|Last usable ip address |10.0.2.254|
+| Description            | Value         |
+| ---------------------- | ------------- |
+| Total number of IP addresses | 256       |
+| Number of usable IP addresses | 253     |
+| Network                 | 10.0.2.0      |
+| Gateway                 | 10.0.2.1      |
+| Broadcast               | 10.0.2.255    |
+| First usable IP address | 10.0.2.2      |
+| Last usable IP address  | 10.0.2.254    |
   
-We will now assign static ip addresses within this network to the Kali VM and Metasploitable VM.
+We will now assign static IP addresses within this network to the Kali VM and Metasploitable VM.
   
 #### Kali
-Setting up static ip address on Kali Linux is somewhat straight forward. We will do this from the
-command line. In case you did not solve the issue with persisting the keyboard layout for Kali, remember
-you change the layout for the session, with the command `setxkbmap -layout dk` (replacing _dk_ with the language abbreviation you desire).
+Setting up a static IP address on Kali Linux is somewhat straightforward and can be accomplished from the command line. If the issue with persisting the keyboard layout for Kali remains unsolved, remember that you can change the layout for the session using the command `setxkbmap -layout dk` (replace _dk_ with the desired language abbreviation).
 
-1. Start the Kali VM, and open a terminal by pressing ´ctrl+alt+t´
-2. Edit the network configuration file by executing the command `nano /etc/network/interfaces`
-3. Append the following text to the file:  
-```
-auto eth0
-iface eth0 inet static
-address 10.0.2.2/24
-gateway 10.0.2.1
-```  
-_If auto eth0 is already defined in the file, you should overwrite that_  
-![Alt text](./EnviromentSetup/image-10.png)  
-4. Save the changes by pressing `ctrl+s` and exit nano by pressing `ctrl+x`.  
-5. restart the network process by executing the command `systemctl restart networking`  
-6. Open the `resolv.conf` file with the command `nano /etc/resolv.conf`   
-7. Add the line `nameserver 8.8.8.8`  
-8. Save the change by pressing `ctrl+s` and exit nano by pressing `ctrl+x`  
-9. Test the network configuration by executing the command `ping www.google.com` sending ping packages to google. If you are getting a response, the configuration is working.  
-  
+1. Start the Kali VM and open a terminal by pressing `Ctrl+Alt+T`.
+2. Edit the network configuration file by executing the command `nano /etc/network/interfaces`.
+3. Append the following text to the file:
+    ```
+    auto eth0
+    iface eth0 inet static
+    address 10.0.2.2/24
+    gateway 10.0.2.1
+    ```  
+    _If `auto eth0` is already defined in the file, you should overwrite that._  
+    ![Alt text](./EnviromentSetup/image-10.png)  
+4. Save the changes by pressing `Ctrl+S`, and exit Nano by pressing `Ctrl+X`.  
+5. Restart the network process by executing the command `systemctl restart networking`.  
+6. Open the `resolv.conf` file with the command `nano /etc/resolv.conf`.  
+7. Add the line `nameserver 8.8.8.8`.  
+8. Save the change by pressing `Ctrl+S`, and exit Nano by pressing `Ctrl+X`.  
+9. Test the network configuration by executing the command `ping www.google.com` to send ping packets to Google. If you receive a response, the configuration is working.
+   
 #### Metasploitable (Ubuntu)
-Metasploitable is based on a Ubuntu 8.x distribution of Linux and is somewhat outdated. Further more it is not designed nor
-build a lot of human interaction. Therefor it can be a bit more tricky to change its configurations (Compared to Kali, and newer Ubuntu versions), but by no means impossible nor
-to difficult.
+Metasploitable runs on a distribution of Ubuntu 8.x, which is somewhat outdated and not designed for extensive human interaction. Consequently, changing its configurations might be more challenging compared to Kali and newer Ubuntu versions, but it is feasible.
 
-1. Start the Metasploitable VM
-2. When prompted for credentials, Authenticate using the default credentials `Username: msfadmin password: msfadmin`
-3. Set the keyboard layout to your desired language with the command `loadkeys <langauge code>` (E,g, `loadkeys dk` for danish)
-4. Edit the network configuration file, by executing the command `nano /etc/network/interfaces`
-5. In the configuration file, append the following text:
-```
-auto eth0
-iface eth0 inet static
-address 10.0.2.3
-netmask 255.255.255.0
-network 10.0.2.0
-broadcast 10.0.2.255
-gateway 10.0.2.1
-dns-nameservers 8.8.8.8
-```  
-_If auto eth0 is already defined in the file, you should overwrite that_  
+1. Start the Metasploitable VM.
+2. When prompted for credentials, authenticate using the default credentials: `Username: msfadmin`, `Password: msfadmin`.
+3. Set the keyboard layout to your desired language using the command `loadkeys <language code>` (e.g., `loadkeys dk` for Danish).
+4. Edit the network configuration file by executing the command `nano /etc/network/interfaces`.
+5. Append the following text to the configuration file:
+    ```
+    auto eth0
+    iface eth0 inet static
+    address 10.0.2.3
+    netmask 255.255.255.0
+    network 10.0.2.0
+    broadcast 10.0.2.255
+    gateway 10.0.2.1
+    dns-nameservers 8.8.8.8
+    ```
+    _If `auto eth0` is already defined in the file, you should overwrite that._  
+    ![Alt text](./EnviromentSetup/image-11.png)  
+6. Save the changes to the file by pressing `Ctrl+S`, and exit Nano by pressing `Ctrl+X`.
+7. Restart the network service by executing the command `/etc/init.d/networking restart`.
+8. Test the network settings by pinging Google using the command `ping www.google.com`.
   
-![Alt text](./EnviromentSetup/image-11.png)  
-  
-6. Save the changes to the file by pressing `ctrl+s` and exit nano by pressing `ctrl+x`
-7. Restart the network service by executing the command `/etc/init.d/networking restart`
-8. Test the network setting by pinging Google, with the command `ping www.google.com`
+Here is a revised version of the network connection testing instructions:
 
+#### Testing the network connection between Metasploitable and Kali Linux
+It is crucial to ensure proper network communication between the Kali VM and the Metasploitable VM. To verify the correct configuration, a final test involves pinging the Kali VM from the Metasploitable VM.
+When testing network connections, the standard method involves using the [ping command](https://linux.die.net/man/8/ping). This command utilizes the Internet Control Message Protocol (ICMP) to send a request and waits for a successful response.
+While testing ICMP connectivity doesn't necessarily require using Tcpdump, it helps verify that the host responding to the ICMP request matches the host against which the connectivity was tested. Although it might seem redundant in a small setup like this, it's a good practice, especially in larger environments or when working during late hours with a tired mind.
 
-#### Testing the network connection between metasploitable and Kali Linux
-It is important that the Kali VM and the Metasploitable VM can communicate on the network, so the final 
-test to validate correct configuration, is to ping the Kali VM from the Metasploitable VM.
-  
-Often when testing network connections, a ping request is sent using the [ping command](https://linux.die.net/man/8/ping). This command
-sends a request using the Internet control message protocol (ICMP) and awaits a successful response to the request.
-In the test, the application Tcpdump is used on the receiving VM (Kali). Using Tcpdump is not necessary to test network connectivity with ICMP requests,
-but it does verify that the host responding to the ICMP request, is the host that connectivity where tested towards. Strictly speaking, this is seems redundant in
-a small setup such as this. But it is a good  habit, that will come in handy when you are testing in bigger environments, or in the late hours with a tired mind.
-  
-1. Turn on the Kali VM and The Metasploitable VM.
-2. In the Kali VM, start the host network monitor _tcpdump_ by executing the command `tcpdump icmp`. the  ICMP parameter, specifies that tcpdump should only create output, when a ICMP request is received
-3. In the Metasploitable VM, send a ICMP request to the kali VM by executing the command `ping 10.0.2.2` 
-4. In the Metasploitable VM, verify that a response to the ICMP request is received.
-5. In the Kali VM, verify that Tcpdump have create an output line in the CLI for each ICMP request.
+Here are the steps to conduct this test:
 
+1. Power on both the Kali VM and the Metasploitable VM.
+2. In the Kali VM, initiate the host network monitor _tcpdump_ by executing the command `tcpdump icmp`. The 'ICMP' parameter instructs tcpdump to produce output specifically when an ICMP request is received.
+3. In the Metasploitable VM, send an ICMP request to the Kali VM by executing the command `ping 10.0.2.2`.
+4. Verify in the Metasploitable VM that a response to the ICMP request from the Kali VM is received.
+5. In the Kali VM, confirm that Tcpdump has generated an output line in the CLI for each ICMP request.
+  
 ### Recovery (Restore points)
-When experimenting or changing configurations of VMs, an unintended side effect often is that something goes wrong and they
-stop working in the intended manner. Usually this can be fixed, but fixing it can be time consuming, and an unwanted distraction from
-learning more general concepts. Therefor it is a good idea to create restore points(snapshots) for each VM in the environment, so that each vm  
-can be restored to a functioning state. In the subsequent steps, you will be show how to do this. You should do this for each of your VMs, and you
-should always do it, before making any changes to the configurations or setup of the VM (Major ones at least).  
+When experimenting or altering VM configurations, unexpected issues can arise, disrupting their intended functionality. While these issues are typically fixable, troubleshooting can be time-consuming and distract from learning key concepts. To prevent such setbacks, it's wise to create restore points (snapshots) for each VM in your environment. This allows you to revert each VM to a previously working state. Always create a snapshot before making any significant changes to a VM's setup or configurations.
+  
+Follow these steps to create a snapshot for a VM in VirtualBox:
 
-1. In Virtual box, click the `options` icon to the right of the VM name and select `snapshots`  
-![Alt text](./EnviromentSetup/image-12.png)  
-2. Click the `Take` button  
-![Alt text](./EnviromentSetup/image-13.png)  
-3. Give the snapshot a name that relates to the current state of the VM, and a description  
-![Alt text](./EnviromentSetup/image-14.png)  
+1. In VirtualBox, locate and select the desired VM from the VM list.
+2. Click on the `Options` icon to the right of the VM name and then select `Snapshots`.  
+   ![Alt text](./EnviromentSetup/image-12.png)
+3. Inside the `Snapshots` window, click the `Take` button.  
+   ![Alt text](./EnviromentSetup/image-13.png)
+4. Provide a name and description for the snapshot that indicates the current state of the VM.  
+   ![Alt text](./EnviromentSetup/image-14.png)
 
-That is all there is to it. Next time you create a snapshot of the VM an additional entry will appear indented after the previous snapshot.  
-![Alt text](./EnviromentSetup/image-15.png)
+By following these steps, you'll create a snapshot of the current state of the VM. Each subsequent snapshot will appear indented below the previous one in the list.
+
+**Remember to consistently create restore points. Neglecting this practice might lead to extensive troubleshooting in the event of OS misconfigurations.**
+   
+### Setting Up Ubuntu Server VM:
+
+#### VM Creation:
+
+1. **Download Ubuntu Server 23.10 ISO**:
+   - Obtain the ISO file from the official Ubuntu website: [https://ubuntu.com/download/server](https://ubuntu.com/download/server).
+
+2. **Create a New VM in VirtualBox**:
+   - Navigate to `Machine -> New`.
+   - Provide the server VM with an appropriate name.
+   - Select "Other" for the `ISO image` and browse for the downloaded Ubuntu Server ISO file.
+   - ![Alt text](image.png)
+
+3. **Configure VM Settings**:
+   - Set up your desired credentials during the installation process.
+   - Allocate 2GB RAM and start with 1 CPU.
+   - Check "Create a virtual Hard Disk Now" and set the size to 25GB.
+   - ![Alt text](image-1.png)
+
+4. **Finalize VM Creation**:
+   - Click `Finish` and await the completion of the VM creation process.
+
+5. **Configure VM Network Settings**:
+   - Once the VM is created, configure the VM's network settings as defined in the section [Adding VM to the NAT Network](#adding-vm-to-the-nat-network).
+
+#### Ubuntu Server Setup:
+
+1. **Start Ubuntu Server VM and Initiate Installation**:
+   - Start the Ubuntu Server VM and wait for the installation wizard to appear.
+   - Choose `Ubuntu Server` when prompted for the `type of install`.
+
+2. **Configure Network Settings**:
+   - In the `Network connections` menu, mark the network interface and press `space`.
+   - Select `Edit IPv4` and choose `Manual` for `IPv4`.
+   - Enter the network information described in the [Configuring static ip address](#configuring-static-ip-address) section, with the IP address for this host set to `10.0.2.4`.
+   - ![Alt text](image-5.png)
+   - ![Alt text](image-6.png)
+   - ![Alt text](image-7.png)
+   - ![Alt text](image-8.png) *(Note: the subnet is written in CIDR format)*
+
+3. **Complete Installation**:
+   - Follow the remaining installation steps; typically, the process is straightforward.
+   - Remember to update the Ubuntu instance using the command `apt update && apt upgrade`.
+  
+### Windows 11 VM Setup:
+
+1. **Download Windows 11 Prebuilt VM**:
+   - Obtain the prebuilt Windows 11 VM from [Microsoft's VM download page](https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/).
+   
+2. **Unzip the Downloaded File**:
+   - Extract the downloaded file to a suitable folder.
+
+3. **Import the VM in VirtualBox**:
+   - Open VirtualBox and navigate to `Files -> Import Appliance`.
+   - Browse for the unzipped OVA file.
+   - ![Alt text](image-9.png)
+   
+4. **Complete VM Import**:
+   - Finish the import process and wait for the VM to be created.
+
+5. **Configure VM Network Settings**:
+   - Configure the VM's network settings as defined in the section [Adding VM to the NAT Network](#adding-vm-to-the-nat-network).
+   
+6. **Start the Windows 11 VM**:
+   - Begin running the VM.
+
+7. **Set Up Windows 11 with Static IP**:
+   - Follow a tutorial like [Configuring static ip in Windows 11](https://www.google.com/search?q=setting+static+ip+on+windows+11&oq=setting+static+ip+on+windows+11&  gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQABiABDIHCAIQABiABDIHCAMQABiABDIICAQQABgWGB4yCAgFEAAYFhgeMggIBhAAGBYYHjIICAcQABgWGB4yCAgIEAAYFhgeMggICRAAGBYYHtIBCDUyODZqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8#fpstate=ive&ip=1&vld=cid:20831224,vid:w_dMQePa0sQ,st:0).
+   - Set the IP address to `10.0.2.5` and configure the remaining settings according to the instructions in the [Configuring static ip adresse](#configuring-static-ip-address) section.
+   
+   > Note: Windows firewall does not allow ICMP packages by default; you'll need to create a firewall rule to permit this.
     
-**Always remember to create restore points. Forgetting it, can present you with a very time consuming lesson in debugging OS misconfigurations**
-
-### Ubuntu Server
-We will setup a VM with Ubuntu server as well which will serve as the deployment OS for the environment.
-Canonical which created and maintains Ubuntu have not created an official premade image. so rather the 
-
-1. Download Ubuntu server 23.10 from ISO file from the official Ubuntu website[https://ubuntu.com/download/server](https://ubuntu.com/download/server)
-2. In Virtual box, choose _machine->new_    
-![Alt text](image.png)  
-3. Give the server VM an appropriate name, and in the `ISO image` drop down menu select other, and browse for the downloaded Ubuntu server ISO file  
-![Alt text](image-1.png)  
-4. Enter your desired credentials **And remember them, if you forget them, there is no recovery**  
-![Alt text](image-2.png)  
-5. Set your desired amount of RAM and number of CPUs (Start by trying 1 cpu and 2GB of RAM, and increase later if needed)  
-![Alt text](image-3.png)  
-6. Ensure that `Create a virtual Hard Disk Now` is checked, and set the size for `25 GB`   
-![Alt text](image-4.png)    
-7. Click the finish button, and await that the WM is created.  
-8. Once the VM is created, Configure the VMs network setting as defined in the section [Adding VM  to the nat network](#adding-vm-to-the-nat-network)  
-  
-Next comes the setup of  Ubuntu server. As mentioned earlier, this is not a prebuilt image but rather an image created by virtualbox using the 
-Ubuntu ISO file as installation media. So you will have to go through the Ubuntu installation process. I will skip the trivial parts of the
-installation process  (E.g. choosing language etc. ).  
-  
-1. Start you Ubuntu server VM and wait for the installation wizard when prompted.
-2. When prompted for `type of install`, choose `Ubuntu Server`.  
-3. In the `Network connections`menu, enter the network setting by marking the network interface and pressing `space` key   
-![Alt text](image-5.png)   
-4. Select  `Edit IPv4`  
-![Alt text](image-6.png)  
-5. Choose `Manual` for `IPv4`   
-![Alt text](image-7.png)  
-6. Enter the network information, described in the [Configuring static ip adresse](#configuring-static-ip-address) section. The ip address for this host should be `10.0.2.4`  
-![Alt text](image-8.png)  
-_Note the the subnet is written in CIDR format_  
-  
-7. In the `Guided storage configuration` prompt, choose `use an entire disk`  
-    
-The rest of the installation should be pretty straight forward.  Although you should remember to update the Ubuntu instance with the command `apt update && apt upgrade`
-
-### Windows 11
-We will also create a windows 11 vm.
-Microsoft provides a prebuilt windows 11 image which is specifically created for development environments. It is free and uses a trial license.
- 
-1. Download the prebuilt windows 11 VM from  https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/  
-2. unzip the downloaded file to an appropriate folder.  
-3. In virtual box, click _Files -> Import appliance_ and browse for the unzipped OVA file.   
-![Alt text](image-9.png)   
-4. Finish the import and await that the VM is created.  
-5. Configure the VMs network setting as defined in the section [Adding VM  to the nat network](#adding-vm-to-the-nat-network)  
-6. start the VM   
-7. Configure Windows to use a static ip. You can follow this tutorial [Configuring static ip in windows 11](https://www.google.com/search?q=setting+static+ip+on+windows+11&oq=setting+static+ip+on+windows+11&  gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQABiABDIHCAIQABiABDIHCAMQABiABDIICAQQABgWGB4yCAgFEAAYFhgeMggIBhAAGBYYHjIICAcQABgWGB4yCAgIEAAYFhgeMggICRAAGBYYHtIBCDUyODZqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8#fpstate=ive&ip=1&vld=cid:20831224,vid:w_dMQePa0sQ,st:0). The ip address should b `10.0.2.5`, and the
-remaining configuration should be according to that described in the [Configuring static ip adresse](#configuring-static-ip-address) section.  
-  
- _Windows firewall does not allow ICMP packages by default, you need to create a firewall rule to allow this_
-  
 ### Resource requirements
 Resource usage (requirements): 16GB+ (32GB recommended)
 _The resource usage differ depending on the number of running VMs. Omitting the windows VM, lowers the resource usage significantly_
