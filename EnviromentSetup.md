@@ -161,6 +161,9 @@ By following these steps, you'll create a snapshot of the current state of the V
 **Remember to consistently create restore points. Neglecting this practice might lead to extensive troubleshooting in the event of OS misconfigurations.**
    
 ### Setting Up Ubuntu Server VM:
+Canonical who maintain Ubuntu, does not provide a prebuilt image, so unlike Kali and Metasploitable. We will have to 
+first create a virtual machine, and the install ubuntu onto the virtual machine.
+
 
 #### VM Creation:
 
@@ -169,15 +172,18 @@ By following these steps, you'll create a snapshot of the current state of the V
 
 2. **Create a New VM in VirtualBox**:
    - Navigate to `Machine -> New`.
-   - Provide the server VM with an appropriate name.
+   - Provide the server VM with an appropriate name.  
+     ![Alt text](./EnviromentSetup/image-17.png)  
    - Select "Other" for the `ISO image` and browse for the downloaded Ubuntu Server ISO file.
-   - ![Alt text](image-16.png)
+   - ![Alt text](./EnviromentSetup/image-16.png)
 
 3. **Configure VM Settings**:
-   - Set up your desired credentials during the installation process.
-   - Allocate 2GB RAM and start with 1 CPU.
-   - Check "Create a virtual Hard Disk Now" and set the size to 25GB.
-   - ![Alt text](image-17.png)
+   - Set up your desired credentials during the installation process.  
+      ![ALT text](./EnviromentSetup/image-23.png)  
+   - Allocate 2GB RAM and start with 1 CPU.  
+      ![ALT text](./EnviromentSetup/image-24.png)    
+   - Check "Create a virtual Hard Disk Now" and set the size to 25GB.  
+      ![ALT text](./EnviromentSetup/image-25.png)    
 
 4. **Finalize VM Creation**:
    - Click `Finish` and await the completion of the VM creation process.
@@ -195,11 +201,11 @@ By following these steps, you'll create a snapshot of the current state of the V
 2. **Configure Network Settings**:
    - In the `Network connections` menu, mark the network interface and press `space`.
    - Select `Edit IPv4` and choose `Manual` for `IPv4`.
-   - Enter the network information described in the [Configuring static ip address](#configuring-static-ip-address) section, with the IP address for this host set to `10.0.2.4`.
-   - ![Alt text](image-18.png)
-   - ![Alt text](image-19.png)
-   - ![Alt text](image-20.png)
-   - ![Alt text](image-21.png) *(Note: the subnet is written in CIDR format)*
+   - Enter the network information described in the [Configuring static ip address](#configuring-static-ip-address) section, with the IP address for this host set to `10.0.2.4`.  
+   - ![Alt text](./EnviromentSetup/image-18.png)  
+   - ![Alt text]./EnviromentSetup/image-19.png)  
+   - ![Alt text](./EnviromentSetup/image-20.png)  
+   - ![Alt text](./EnviromentSetup/image-21.png) *(Note: the subnet is written in CIDR format)*  
 
 3. **Complete Installation**:
    - Follow the remaining installation steps; typically, the process is straightforward.
@@ -216,7 +222,7 @@ By following these steps, you'll create a snapshot of the current state of the V
 3. **Import the VM in VirtualBox**:
    - Open VirtualBox and navigate to `Files -> Import Appliance`.
    - Browse for the unzipped OVA file.
-   - ![Alt text](image-22.png)
+   - ![Alt text](./EnviromentSetup/image-22.png)
    
 4. **Complete VM Import**:
    - Finish the import process and wait for the VM to be created.

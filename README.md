@@ -2,7 +2,8 @@
 
 
 ## Getting started 
-The steps mentioned below, should be followed sequentially.
+Start by following the guides in [Setting up the enviroment](EnviromentSetup.md)
+from there you shuo
 
 ### Setting up the enviroment
 
