@@ -66,4 +66,26 @@ DNS1=8.8.8.8
 6. Restart the process `network-service` by executing the command `systemctl restart network-service`
 7. Verify the correct working of the network configurations, by pinging the server from another host in the NAT network.
 
-### Entering Wazuh GUI (WUI)
+### Exposing The Wazuh server to host
+
+Wazuh provides a user interface to view all the data collected by the Wazuh server. Accessing the GUI requires connecting to it from a VirtualBox VM within the NAT network or configuring VirtualBox to forward incoming host requests on a specific port to the Wazuh Server VM port.
+
+The NAT network in VirtualBox is not reachable from the host operating system. To enable the host to reach a VM within the NAT network, you can either provide the host with an additional network adapter using a bridged adapter network (VM connected to the same LAN as the host) or a Host-only adapter. However, for reaching the Wazuh user interface, a more practical solution is adding a port forwarding rule to the NAT network, named "DefaultVMNet."
+
+After setting up the port forwarding rule, you can access the Wazuh GUI at the URL https://127.0.0.1:443. Perform the following network configurations in VirtualBox:
+
+1. Enter _File -> Tools -> Network Manager_.
+2. Click on the `NAT Networks` pane.
+3. Double-click on the NAT network `DefaultVMNet`.
+4. In the bottom menu at the bottom of the screen, click the `Port Forwarding` pane.
+5. Click the green plus icon to add a new port forwarding rule.
+6. Provide the rule with the following properties shown in the table below:
+
+    | Name      | Protocol | Host IP     | Host Port | Guest IP  | Guest Port |
+    | --------- | -------- | ----------- | --------- | --------- | ---------- |
+    | Wazuh GUI | TCP      | 127.0.0.1   | 443       | 10.0.2.6   | 443        |
+
+7. Start the Wazuh server VM.
+8. In your host OS, enter the URL `https://127.0.0.1:443` in your browser to access the Wazuh user interface.
+9. When prompted for credentials, use the default credentials: `Username: admin, Password: admin`.
+   _Note: It might take a while for the Wazuh server to start up due to the numerous applications in the single-node deployment._
