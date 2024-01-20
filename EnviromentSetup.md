@@ -245,10 +245,19 @@ _The resource usage differ depending on the number of running VMs. Omitting the 
 
 
 ### Exporting the images
+Once a VM has been configured and software installed, it can be exported so that the VM may be used on other hardware. You can export a VM in VirtualBox with the following steps:
 
+1. In VirtualBox, click **File -> Export Appliance**.
+2. Choose the VM you wish to export.
+3. Make the following selections:
+   - Set `Format` to `Open Virtualization Format 2.0`.
+   - In `File`, set the folder where the exported VM should be located along with a filename (Ensure you have the .ova extension on the filename).
+   - In `MAC Address Policy`, select `Strip all network adapter MAC address` (This ensures that the MAC address from the current setup is not reused).
+   - In `Additionally`, ensure the `Write Manifest file` is checked, and that `Include ISO image files` is unchecked.
+4. In the prompted `Appliance settings` menu, verify that all settings are correct and click Finish.
+5. Wait for the appliance writing to finish.
 
-
-
+Now you have a premade VM image ready to use. Of course, you need to make some configuration changes in the VM, such as the IP address.
 
 
 

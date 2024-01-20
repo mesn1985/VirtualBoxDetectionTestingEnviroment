@@ -10,7 +10,7 @@ Wazuh consists of multiple components and is designed for the distributed deploy
 While experimenting with Wazuh single-node deployment, I experienced fewer complications using VirtualBox for VM hosting than using VMware. That's why I recommend using VirtualBox. However, the complications I had with VMware could just as well be due to a lack of competence on my side.
   
 ## prerequisites 
-You should have completed the instructions for [installing VirtualBox](./EnviromentSetup.md#install-virtual-box), [Setting up the Network](./EnviromentSetup.md#setting-up-the-network), and [Setting Up Ubuntu Server VM](./EnviromentSetup.md#setting-up-ubuntu-server-vm).
+You should have completed the instructions for [installing VirtualBox](./EnviromentSetup.md#install-virtual-box), [Setting up the Network](./EnviromentSetup.md#setting-up-the-network).
 
 The preliminary exercise with Wazuh uses an Ubuntu server as the surveyed host, but later, other host VMs might be used as well. The setup for all host VMs can be found in [Environment setup](./EnvironmentSetup.md)."
 
