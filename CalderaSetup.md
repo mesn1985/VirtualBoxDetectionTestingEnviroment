@@ -76,7 +76,7 @@ In this final step of setting up the Caldera server, you will first clone the so
    ```bash
    nohup python3 server.py --insecure &
    ```
-
+   _The insecure options means that the default configuration file is used, which i not recommend for other the experiment (Meaning you should create a proper configuration file while not learning)_
 5. Wait for a while, and print out the contents of the file `nohup.out` using the command:
    ```bash
    cat nohup.out
@@ -86,3 +86,29 @@ In this final step of setting up the Caldera server, you will first clone the so
 6. Enter the URL `127.0.0.1:8888` in the host system's browser and log in as the administrator with the default credentials `username: admin`, `password: admin`.
 
 # Configuring the server to start on boot
+It is inconvenient to manually start the server every time you restart the VM, so we will configure the Ubuntu server to automatically start up the server upon boot. In order to start the server automatically upon boot, we need to add it as a [Systemd](https://www.linux.com/training-tutorials/understanding-and-using-systemd/) service. Follow the instructions below to configure the server as a systemd service:
+
+1. Create and edit a service file named `caldera_startup.service` in the directory `/etc/systemd/system/caldera_startup.service` by opening the text editor nano with the command: `nano /etc/systemd/system/caldera_startup.service`.
+2. Insert the text below. The placeholders represented with `<...>` need to be replaced with values specific to your configuration:
+
+```
+[Unit]
+Description=Script for starting up Caldera server
+
+[Service]
+WorkingDirectory=<path to caldera source code directory>
+User=<user name, Not root!!! Remember the principle of least privilege!>
+ExecStart=/usr/bin/python3 <path to caldera source code directory>server.py --insecure
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+3. Save and exit nano by first pressing `Ctrl+S` and then `Ctrl+X`.
+4. Enable the service by executing the command: `systemctl enable caldera_startup`.
+5. It's recommended to reload systemd after creating a new service file. After saving and exiting nano, execute the following command to reload systemd: `systemctl daemon-reload`.
+6. Verify a successful server startup by viewing the system logs that involve the created Caldera service with the command: `journalctl -b | grep caldera`.
+7. Enter the GUI from the host's browser to again verify the correct working of the service.
+
+Now you can just start the VM, and the Caldera server will automatically be started as a service.
