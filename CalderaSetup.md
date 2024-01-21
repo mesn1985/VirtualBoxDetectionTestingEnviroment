@@ -88,7 +88,7 @@ In this final step of setting up the Caldera server, you will first clone the so
 # Configuring the server to start on boot
 It is inconvenient to manually start the server every time you restart the VM, so we will configure the Ubuntu server to automatically start up the server upon boot. In order to start the server automatically upon boot, we need to add it as a [Systemd](https://www.linux.com/training-tutorials/understanding-and-using-systemd/) service. Follow the instructions below to configure the server as a systemd service:
 
-1. Create and edit a service file named `caldera_startup.service` in the directory `/etc/systemd/system/caldera_startup.service` by opening the text editor nano with the command: `nano /etc/systemd/system/caldera_startup.service`.
+1. Create and edit a service file named `caldera_startup.service` in the directory `/etc/systemd/system/` by opening the text editor nano with the command: `nano /etc/systemd/system/caldera_startup.service`.
 2. Insert the text below. The placeholders represented with `<...>` need to be replaced with values specific to your configuration:
 
 ```
