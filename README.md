@@ -1,8 +1,4 @@
 # Virtual box pentesting environment
-
-
-Your revised text is clear and well-structured. However, there is a small spelling error in the last paragraph. The correct spelling is "Environment" instead of "Enviroment." Here's the corrected version:
-
 This lab is a VirtualBox penetration testing environment. The goal of this lab is to set up numerous vulnerable targets against which basic penetration testing can be executed.
 
 Furthermore, this lab will support the learning of threat detection using SIEM/XDR and adversary simulation, providing a holistic approach toward cybersecurity.
