@@ -9,10 +9,10 @@ You can follow the guide [here, for setting up Ubuntu server](./EnvironmentSetup
 
 1. Enter the Wazuh manager GUI at [127.0.0.1:80](https://127.0.0.1:80)
 2. Select `Agents` in Wazuh drop down menu.
-![Alt text](WazuhDropDownMenu.png)
+![Alt text](./WazuhAgentSetup/WazuhDropDownMenu.png)
   
 3. In the appearing menu, select `Deploy new agent`
- ![Alt text](./DeployNewAgent.png)
+ ![Alt text](./WazuhAgentSetup/DeployNewAgent.png)
    
 4. In the appearing menu, Make the following selections:
     
@@ -20,7 +20,7 @@ You can follow the guide [here, for setting up Ubuntu server](./EnvironmentSetup
  | ----------- | -------- | ---------- | --------- |  
  | DEB amd64 | 10.0.2.6  | Ubuntu_host_1 | Default |  
    
- ![Alt text](WazuhAgentAttributes.png)  
+ ![Alt text](./WazuhAgentSetup/WazuhAgentAttributes.png)  
    
 5. Copy,paste and execute the CLI command in step 4 on Ubuntu server. The command looks something like:
   
@@ -43,7 +43,7 @@ sudo systemctl start wazuh-agent
 9. The agents log file is located at the path: `/var/ossec/logs/ossec.log`. Look in the log file to confirm that the agent have started correctly.
 10. In the Wazuh manager GUI, go into the `Agents` menu, and confirm that the new agent have been registered as active.  
   
-![Alt text](activeAgent.png)  
+![Alt text](./WazuhAgentSetup/activeAgent.png)  
 
 # Useful File location
   
