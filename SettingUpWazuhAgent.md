@@ -8,7 +8,8 @@ You can follow the guide [here, for setting up Ubuntu server](./EnvironmentSetup
 ## Setting up the Wazuh agent
 
 1. Enter the Wazuh manager GUI at [127.0.0.1:80](https://127.0.0.1:80)
-2. Select `Agents` in Wazuh drop down menu.
+2. Select `Agents` in Wazuh drop down menu.  
+  
 ![Alt text](./WazuhAgentSetup/WazuhDropDownMenu.png)
   
 3. In the appearing menu, select `Deploy new agent`
