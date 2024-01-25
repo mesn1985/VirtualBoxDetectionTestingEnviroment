@@ -46,7 +46,7 @@ sudo systemctl start wazuh-agent
   
 ![Alt text](./WazuhAgentSetup/activeAgent.png)  
 
-# Useful File location
+# Useful File locations
   
 - The Agent configuration file can be found in the path: `/var/ossec/etc/ossec.conf`
 - The Agent log file can be found in the path: `/var/ossec/logs/ossec.log`
