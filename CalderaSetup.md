@@ -99,6 +99,7 @@ Description=Script for starting up Caldera server
 WorkingDirectory=<path to caldera source code directory>
 User=<user name, Not root!!! Remember the principle of least privilege!>
 ExecStart=/usr/bin/python3 <path to caldera source code directory>server.py --insecure
+ExecStop=/bin/kill -s SIGINT -$MAINPID & /bin/kill -s SIGINT -$MAINPID
 Restart=always
 
 [Install]
@@ -112,3 +113,6 @@ WantedBy=multi-user.target
 7. Enter the GUI from the host's browser to again verify the correct working of the service.
 
 Now you can just start the VM, and the Caldera server will automatically be started as a service.
+
+## Graceful shutdown (Important to read!!!)
+"It is important to ensure the graceful shutdown of the Caldera server. The line `ExecStop=/bin/kill -s SIGINT $MAINPID; /bin/kill -s SIGINT $MAINPID` in the service configuration ensures that the server is closed with `SIGINT` when the VM is gracefully shut down (e.g., shutting down the server with the `shutdown` command). If you simply power off or otherwise ungracefully shut down the server, you may experience errors and lose data that has not been persisted."
