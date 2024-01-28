@@ -55,35 +55,67 @@ The Caldera server provides a GUI accessible through a website. The website is e
 
   Once you have completed the next section, you will be able to access the Caldera server GUI from the host at `127.0.0.1:8888`.
 
-### Cloning and Executing the Application
+### Cloning the Source Code
 
-In this final step of setting up the Caldera server, you will first clone the source code from the official Caldera repository and then install all Python runtime dependencies using the Python package manager `pip3`. Finally, you will start the server.
-
-1. Clone the source from its GitHub repository by executing the command:
+1. **Clone the Repository:**
    ```bash
    git clone https://github.com/mitre/caldera.git --recursive --branch 4.2.0
    ```
-   _The release 4.2.0 is used; you can view all current releases on [https://github.com/mitre/caldera/releases](https://github.com/mitre/caldera/releases)._
 
-2. When the cloning is completed, navigate to the directory with the cloned source code.
-3. Install all Python dependencies by executing:
+   This command clones the Caldera repository from GitHub, specifying the branch (release 4.2.0) and including submodules (`--recursive`).
+
+### Installing Dependencies
+
+2. **Navigate to Cloned Directory:**
+   After cloning, navigate to the directory with the cloned source code.
+
+3. **Install Python Dependencies:**
    ```bash
    pip3 install -r requirements.txt --break-system-packages
    ```
-   _The `--break-system-packages` option is used to acknowledge that the packages are installed system-wide. If you wish to install the dependencies in an isolated environment, you should use a Python virtual environment._
 
-4. Once the packages are installed, execute the Caldera server application detached with the command:
-   ```bash
-   nohup python3 server.py --insecure &
-   ```
-   _The insecure options means that the default configuration file is used, which i not recommend for other the experiment (Meaning you should create a proper configuration file while not learning)_
-5. Wait for a while, and print out the contents of the file `nohup.out` using the command:
-   ```bash
-   cat nohup.out
-   ```
-   Verify that the server has started correctly.
+   Install Python dependencies using `pip3`. The `--break-system-packages` option indicates that the installed packages are system-wide.
 
-6. Enter the URL `127.0.0.1:8888` in the host system's browser and log in as the administrator with the default credentials `username: admin`, `password: admin`.
+### Starting the Server
+
+4. **Start Caldera Server:**
+   ```bash
+   python3 server.py
+   ```
+
+5. **Verification:**
+   Wait for the server to start and verify that it has started correctly.
+
+6. **Access the Server:**
+   Enter `127.0.0.1:8888` in the host system's browser to access the Caldera server.
+
+7. **Shutdown the Server:**
+   Press `ctrl+c` to shut down the server.
+
+### Configuring Authentication
+
+8. **Open Configuration File:**
+   ```bash
+   nano <Caldera source path>/conf/local.yml
+   ```
+
+   Open the configuration file (`local.yml`) using the `nano` text editor.
+
+9. **Change Passwords:**
+   Change the passwords for users 'red', 'admin', and 'blue' in the configuration file.
+
+   Save changes by pressing `ctrl+s`, then exit by pressing `ctrl+x`.
+
+### Restarting the Server with Updated Configuration
+
+10. **Restart Caldera Server:**
+    Execute the Caldera server again:
+    ```bash
+    python3 server.py
+    ```
+
+11. **Authenticate:**
+    Enter the URL `127.0.0.1:8888` in the host system's browser and authenticate using the updated credentials from step 9.
 
 # Configuring the server to start on boot
 It is inconvenient to manually start the server every time you restart the VM, so we will configure the Ubuntu server to automatically start up the server upon boot. In order to start the server automatically upon boot, we need to add it as a [Systemd](https://www.linux.com/training-tutorials/understanding-and-using-systemd/) service. Follow the instructions below to configure the server as a systemd service:
@@ -98,8 +130,8 @@ Description=Script for starting up Caldera server
 [Service]
 WorkingDirectory=<path to caldera source code directory>
 User=<user name, Not root!!! Remember the principle of least privilege!>
-ExecStart=/usr/bin/python3 <path to caldera source code directory>server.py --insecure
-ExecStop=/bin/kill -s SIGINT -$MAINPID & /bin/kill -s SIGINT -$MAINPID
+ExecStart=/usr/bin/python3 <path to caldera source code directory>/server.py
+ExecStop=/bin/kill -s SIGINT $MAINPID
 Restart=always
 
 [Install]
@@ -115,4 +147,13 @@ WantedBy=multi-user.target
 Now you can just start the VM, and the Caldera server will automatically be started as a service.
 
 ## Graceful shutdown (Important to read!!!)
-"It is important to ensure the graceful shutdown of the Caldera server. The line `ExecStop=/bin/kill -s SIGINT $MAINPID; /bin/kill -s SIGINT $MAINPID` in the service configuration ensures that the server is closed with `SIGINT` when the VM is gracefully shut down (e.g., shutting down the server with the `shutdown` command). If you simply power off or otherwise ungracefully shut down the server, you may experience errors and lose data that has not been persisted."
+"It is important to ensure the graceful shutdown of the Caldera server. The line `ExecStop=/bin/kill -s SIGINT $MAINPID` in the service configuration ensures that the server is closed with `SIGINT` when the VM is gracefully shut down (e.g., shutting down the server with the `shutdown` command). If you simply power off or otherwise ungracefully shut down the server, you may experience errors and lose data that has not been persisted."
+
+## viewing logs of the caldera service
+The easiest way to view Caldera server logs is by using `journalctl`. For example, the command:
+
+```bash
+journalctl -r -u caldera_startup.service
+```
+
+This command fetches the application logs for the `caldera_startup.service` unit, displaying them in reverse order, starting with the newest logs first. It provides a convenient way to review recent logs for troubleshooting and monitoring purposes.
