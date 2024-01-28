@@ -114,7 +114,7 @@ the passwords in the configurations file, to  passwords of your choosing.
     Enter the URL `127.0.0.1:8888` in the host system's browser and authenticate using the updated credentials from step 9.
 
 # Configuring the server to start on boot
-**This section is only necessary, if you need to start Caldera server automatically upon VM startup. Running Caldera as Systemd service seems to present some issues with gracefully shutdown if not configured probably, so only do this if there a particular good reason**
+**In general, Caldera is a server application that is not built to restart frequently. I have experienced some fragility when restarting the VM often, so if you restart it frequently, be prepared, as you might need to reinstall it**
   
 It is inconvenient to manually start the server every time you restart the VM, so we will configure the Ubuntu server to automatically start up the server upon boot. In order to start the server automatically upon boot, we need to add it as a [Systemd](https://www.linux.com/training-tutorials/understanding-and-using-systemd/) service. Follow the instructions below to configure the server as a systemd service:
 
