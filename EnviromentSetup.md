@@ -189,7 +189,7 @@ first create a virtual machine, and the install ubuntu onto the virtual machine.
    - Click `Finish` and await the completion of the VM creation process.
 
 5. **Configure VM Network Settings**:
-   - Once the VM is created, configure the VM's network settings as defined in the section [Adding VM to the NAT Network](#adding-vm-to-the-nat-network).
+   - Once the VM is created, configure the VM's network settings as defined in the section [Adding VM to the NAT Network](./EnviromentSetup.md#adding-vms-to-the-nat-network).
 
 #### Ubuntu Server Setup:
 
