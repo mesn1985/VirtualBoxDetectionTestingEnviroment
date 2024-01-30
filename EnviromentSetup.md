@@ -172,8 +172,8 @@ first create a virtual machine, and the install ubuntu onto the virtual machine.
 
 2. **Create a New VM in VirtualBox**:
    - Navigate to `Machine -> New`.  
-   - Provide the server VM with an appropriate name.  
      ![Alt text](./EnviromentSetup/image-16.png)  
+   - Provide the server VM with an appropriate name.    
    - Select "Other" for the `ISO image` and browse for the downloaded Ubuntu Server ISO file.  
      ![Alt text](./EnviromentSetup/image-17.png)  
      
