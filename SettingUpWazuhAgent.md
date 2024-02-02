@@ -50,3 +50,8 @@ sudo systemctl start wazuh-agent
   
 - The Agent configuration file can be found in the path: `/var/ossec/etc/ossec.conf`
 - The Agent log file can be found in the path: `/var/ossec/logs/ossec.log`
+
+
+# Alternative agent setup
+A premade script, based on the [official documentation for setting Wazuh agents on linux](https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-linux.html) can found in
+the [scripts folder](./Scripts/)
