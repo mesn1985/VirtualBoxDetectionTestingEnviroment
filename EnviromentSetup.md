@@ -167,7 +167,7 @@ first create a virtual machine, and the install ubuntu onto the virtual machine.
 
 #### VM Creation:
 
-1. **Download Ubuntu Server 23.10 ISO**:
+1. **Download Ubuntu Server 24.04.4 ISO**:
    - Obtain the ISO file from the official Ubuntu website: [https://ubuntu.com/download/server](https://ubuntu.com/download/server).
 
 2. **Create a New VM in VirtualBox**:
