@@ -88,11 +88,11 @@ _There is a strange bug, where the Proxmox will fail to boot, and get stuck, if 
 12. Send **Ctrl+Alt+Delete** to access the login screen.  
     ![Alt text](image-18.png)
 13. Open _Device Manager_, and check if any drivers are missing. Install any missing drivers from the VirtIO drivers located on the local drive, by browsing
-for the drivers, and selecting the disc with _Virtio_ drivers. Select the entire disc as source, then windows will auto-detect the drivers  
+for the drivers, and selecting the disc with _Virtio_ drivers. Select the entire disc as source, then windows will auto-detect the drivers.
 
-![Alt text](image-19.png)
-![Alt text](image-20.png)
-![Alt text](image-21.png)
-
+![Alt text](image-19.png)  
+![Alt text](image-20.png)  
+![Alt text](image-21.png)  
+  
 
 ## Configuring Static IP address.
