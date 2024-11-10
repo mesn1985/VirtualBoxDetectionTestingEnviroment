@@ -1,3 +1,8 @@
+# Setting up windows server 2022 on Proxmox
+
+## Prerequisites
+Prior to following this guide, you should have working knowledge of how to create VM's on Proxmox.
+
 ## 1. ISO Images
 1. Download the **Windows Server 2022 Trial ISO** (usable for 180 days).
 2. Download the **VirtIO drivers ISO** from [Proxmox VirtIO Drivers](https://pve.proxmox.com/wiki/Windows_VirtIO_Drivers).
@@ -62,6 +67,8 @@ Compared to general Linux VMs, there are a few extra steps because a driver inte
 ## 4. Installing Windows Server
 1. Start the Proxmox VM and switch to the console screen.
 2. If you do not press any key fast enough during boot, restart the VM (send **Ctrl+Alt+Delete**).  
+_There is a strange bug, where the Proxmox will fail to boot, and get stuck, if you do not press any key fast enough_
+  
    ![Alt text](image-11.png)
 3. When asked for a product key, choose **I don't have a product key** to use the trial version.  
 4. Select **Windows Server 2022 Standard (Desktop Experience)** (unless you only want PowerShell).  
@@ -80,7 +87,12 @@ Compared to general Linux VMs, there are a few extra steps because a driver inte
 11. Set your password when prompted.
 12. Send **Ctrl+Alt+Delete** to access the login screen.  
     ![Alt text](image-18.png)
-13. Open _Device Manager_, and check if any drivers are missing. Install any missing drivers from the VirtIO drivers located on the local drive.  
-    ![Alt text](image-19.png)  
-    ![Alt text](image-20.png)  
-    ![Alt text](image-21.png)
+13. Open _Device Manager_, and check if any drivers are missing. Install any missing drivers from the VirtIO drivers located on the local drive, by browsing
+for the drivers, and selecting the disc with _Virtio_ drivers. Select the entire disc as source, then windows will auto-detect the drivers  
+    
+![Alt text](image-19.png)
+![Alt text](image-20.png)
+![Alt text](image-21.png)
+
+
+## Configuring Static IP address.
