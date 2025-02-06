@@ -199,11 +199,9 @@ first create a virtual machine, and the install ubuntu onto the virtual machine.
 
 2. **Configure Network Settings**:
    - In the `Network connections` menu, mark the network interface and press `space`.
+   - ![Alt text](./EnviromentSetup/image-18.png) 
    - Select `Edit IPv4` and choose `Manual` for `IPv4`.
-   - Enter the network information described in the [Configuring static ip address](#configuring-static-ip-address) section, with the IP address for this host set to `10.0.2.4`.  
-   - ![Alt text](./EnviromentSetup/image-18.png)  
-   - ![Alt text]./EnviromentSetup/image-19.png)  
-   - ![Alt text](./EnviromentSetup/image-20.png)  
+   - Enter the network information as shown below in the pictur.  ( Most of the configurations can also be found in [Configuring static ip address](#configuring-static-ip-address) section. )    
    - ![Alt text](./EnviromentSetup/image-21.png) *(Note: the subnet is written in CIDR format)*  
 
 3. **Complete Installation**:
