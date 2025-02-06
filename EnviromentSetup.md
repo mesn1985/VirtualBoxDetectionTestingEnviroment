@@ -13,7 +13,7 @@ Most VM are compressed with 7zip when downloaded. Therefor you should download a
   
 ## Setting up Kali Linux VM
   
-1. Download the Kali Linux VirtualBox VM from [https://cdimage.kali.org/kali-2023.4/kali-linux-2023.4-virtualbox-amd64.7z](https://cdimage.kali.org/kali-2023.4/kali-linux-2023.4-virtualbox-amd64.7z).
+1. Download the Kali Linux VirtualBox VM from [https://cdimage.kali.org/kali-2024.4/kali-linux-2024.4-virtualbox-amd64.7z](https://cdimage.kali.org/kali-2024.4/kali-linux-2024.4-virtualbox-amd64.7z).
 2. Extract the downloaded 7z zip file to a folder (e.g., `C:\vms`).
 3. Add the extracted Kali Linux VM to VirtualBox by clicking _Machine_ -> _Add_ and selecting the _.vbox_ file.  
 ![Alt text](./EnviromentSetup/VirtualBoxAddVM.png)  
