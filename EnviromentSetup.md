@@ -174,7 +174,7 @@ first create a virtual machine, and the install ubuntu onto the virtual machine.
    - Navigate to `Machine -> New`.
    - Provide the server VM with an appropriate name.    
    - Select "Other" for the `ISO image` and browse for the downloaded Ubuntu Server ISO file.   
-   - Ensure that _Skip Unattended installation_ is **Checked**
+   - **Important** Ensure that _Skip Unattended installation_ is **Checked**
      ![Alt text](./EnviromentSetup/image-16.png)  
      
 
