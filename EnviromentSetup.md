@@ -176,11 +176,10 @@ first create a virtual machine, and the install ubuntu onto the virtual machine.
    - Provide the server VM with an appropriate name.    
    - Select "Other" for the `ISO image` and browse for the downloaded Ubuntu Server ISO file.  
      ![Alt text](./EnviromentSetup/image-17.png)  
+   - Ensure that _Skip Unattended installation_ is **Checked**
      
 
 3. **Configure VM Settings**:
-   - Set up your desired credentials during the installation process.  
-      ![ALT text](./EnviromentSetup/image-23.png)  
    - Allocate 2GB RAM and start with 1 CPU.  
       ![ALT text](./EnviromentSetup/image-24.png)    
    - Check "Create a virtual Hard Disk Now" and set the size to 25GB.  
