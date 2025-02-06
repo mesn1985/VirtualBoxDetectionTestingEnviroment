@@ -179,9 +179,9 @@ first create a virtual machine, and the install ubuntu onto the virtual machine.
      
 
 3. **Configure VM Settings**:
-   - Allocate 2GB RAM and start with 1 CPU.  
+   - Unfold the _Hardware_ tab, and Allocate 2GB RAM and start with 1 CPU.  
       ![ALT text](./EnviromentSetup/image-24.png)    
-   - Check "Create a virtual Hard Disk Now" and set the size to 25GB.  
+   - Unfold the _Hardware_ tab and set the size to 25GB.  
       ![ALT text](./EnviromentSetup/image-25.png)    
 
 4. **Finalize VM Creation**:
