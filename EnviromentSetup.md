@@ -3,9 +3,14 @@
 This guide walks you through setting up a virtual environment for cybersecurity learning and experimentation. The environment is designed to include various virtual machines (VMs) managed through VirtualBox 7.0.12.
 
 ## Install virtual box
-All the VMs are configured and executed in Virtual box 7.0.12 executing on a windows 10 host.
-Download Virtual box  7.0.12, and follow the install wizard.
+All the VMs are configured and executed in Virtual box  executing on a windows 10 host.
+Download Virtual box, and follow the install wizard.
 
+I provide two links for virutal box. One for version 7.0.12, and one for the newer version 7.1.6.
+If you are on Windows 10. Then the older version might work better.
+
+Virtual box 7.1.6 can be downloaded from this link: [https://download.virtualbox.org/virtualbox/7.1.6/VirtualBox-7.1.6-167084-Win.exe](https://download.virtualbox.org/virtualbox/7.1.6/VirtualBox-7.1.6-167084-Win.exe)
+  
 Virtual box 7.0.12 can be downloaded from this link: [https://download.virtualbox.org/virtualbox/7.0.12/VirtualBox-7.0.12-159484-Win.exe](https://download.virtualbox.org/virtualbox/7.0.12/VirtualBox-7.0.12-159484-Win.exe)
   
 ## Unpacking the the downloaded VMs.
