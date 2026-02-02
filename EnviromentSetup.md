@@ -20,7 +20,7 @@ Most VM are compressed with 7zip when downloaded. Therefor you should download a
   
 1. Download the Kali Linux VirtualBox VM from [https://cdimage.kali.org/kali-2025.4/kali-linux-2025.4-virtualbox-amd64.7z](https://cdimage.kali.org/kali-2025.4/kali-linux-2025.4-virtualbox-amd64.7z).
 2. Extract the downloaded 7z zip file to a folder (e.g., `C:\source\kaliVM\`).
-3. Add the extracted Kali Linux VM to VirtualBox by clicking _Machine_ -> _Add_ and selecting the _.vbox_ file.  
+3. Add the extracted Kali Linux VM to VirtualBox by clicking _Machine_ -> _Open_ and selecting the _.vbox_ file.  
 ![Alt text](./EnviromentSetup/VirtualBoxAddVM.png)  
 4. Start the Kali Linux instance.
 5. When prompted for credentials, enter the username `kali` and password `kali`.
@@ -179,15 +179,17 @@ first create a virtual machine, and the install ubuntu onto the virtual machine.
    - Navigate to `Machine -> New`.
    - Provide the server VM with an appropriate name.    
    - Select "Other" for the `ISO image` and browse for the downloaded Ubuntu Server ISO file.   
-   - **Important** Ensure that _Skip Unattended installation_ is **Checked**
+   
      ![Alt text](./EnviromentSetup/image-16.png)  
+     **Important** Ensure that _Proceed with Unattended installation_ is **Unchecked**
      
 
 3. **Configure VM Settings**:
-   - Unfold the _Hardware_ tab, and Allocate 2GB RAM and start with 1 CPU.  
+   - Unfold the _Specify virtual hardware_ tab, and Allocate 2GB RAM and start with 1 CPU.  
       ![ALT text](./EnviromentSetup/image-24.png)    
-   - Unfold the _Hardware_ tab and set the size to 25GB.  
+   - Unfold the _Specify virtual hard disk_ tab and set the size to 25GB.  
       ![ALT text](./EnviromentSetup/image-25.png)    
+      **Important** Ensure that the virtual hard drive is not persisted in a cloud syncronized folder (E.g. Onedrive)
 
 4. **Finalize VM Creation**:
    - Click `Finish` and await the completion of the VM creation process.
